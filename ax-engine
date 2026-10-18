@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+
+engine_root="$(cd -- "$(dirname -- "$0")" && pwd)"
+engine_source="$engine_root/Sources/main.swift"
+engine_binary="$engine_root/.build/ax-engine"
+
+if [[ ! -f "$engine_source" ]]; then
+  echo "Engine source is missing: $engine_source" >&2
+  exit 1
+fi
+if [[ ! -x "$engine_binary" || "$engine_source" -nt "$engine_binary" ]]; then
+  mkdir -p "$engine_root/.build"
+  engine_temp="$(/usr/bin/mktemp "$engine_root/.build/ax-engine.XXXXXX")"
+  trap 'rm -f -- "$engine_temp"' EXIT
+  /usr/bin/xcrun swiftc -O "$engine_source" -o "$engine_temp"
+  chmod +x "$engine_temp"
+  mv -f -- "$engine_temp" "$engine_binary"
+  trap - EXIT
+fi
+exec "$engine_binary" "$@"

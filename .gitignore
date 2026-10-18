@@ -1,0 +1,14 @@
+.build/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Native exports can contain private app and document text.
+/artifacts/
+/captures/
+/exports/
+
+# Local credentials and editor state.
+.env
+.env.*
+.venv/

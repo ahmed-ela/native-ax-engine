@@ -303,7 +303,12 @@ with synthetic data.
 
 Repository contents
 Source, tests, the viewer template, and this documentation are versioned.
-Local artifacts/, captures/, and exports/ are excluded because native exports
-can contain private app text. Historical captures remain on the original Mac
-and are not part of a fresh clone. Build products and local credentials are
-also excluded. Review native exports before choosing to share them.
+The saved artifacts/, .build/, and __pycache__/ directories are preserved in
+the compressed backup under backups/. See backups/README.txt for its inventory,
+checksums, and restore instructions. Native exports can contain private app
+text; keep this repository private and review captures before sharing them.
+One likely API credential was redacted from the published backup; original
+local captures were left unchanged. See the backup manifest for details.
+Working artifacts/, captures/, exports/, build products, and local credentials
+remain ignored so future runs do not automatically stage private exports or
+duplicate the archived files.

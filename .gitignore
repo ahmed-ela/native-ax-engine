@@ -7,6 +7,7 @@ __pycache__/
 /artifacts/
 /captures/
 /exports/
+/restored-local-artifacts/
 
 # Local credentials and editor state.
 .env
